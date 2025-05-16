@@ -1,0 +1,64 @@
+version: '3.8'
+
+services:
+  # PHP Service
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: payment-gateway-app
+    restart: unless-stopped
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+    networks:
+      - payment-gateway
+
+  # Nginx Service
+  nginx:
+    image: nginx:alpine
+    container_name: payment-gateway-nginx
+    restart: unless-stopped
+    ports:
+      - "9001:80"
+    volumes:
+      - ./:/var/www
+      - ./docker/nginx/conf.d:/etc/nginx/conf.d
+    networks:
+      - payment-gateway
+
+  # MySQL Service
+  db:
+    image: mysql:8.0
+    container_name: payment-gateway-db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: laravel
+      MYSQL_ROOT_PASSWORD: root123
+    ports:
+      - "3301:3306"
+    volumes:
+      - dbdata:/var/lib/mysql
+    networks:
+      - payment-gateway
+
+  # Node Service for Vite
+  node:
+    image: node:18-alpine
+    platform: linux/amd64
+    container_name: payment-gateway-node
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+    command: sh -c "npm install && npm run dev"
+    ports:
+      - "5173:5173"
+    networks:
+      - payment-gateway
+
+networks:
+  payment-gateway:
+    driver: bridge
+
+volumes:
+  dbdata: 
