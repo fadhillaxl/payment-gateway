@@ -220,4 +220,15 @@ class VendingController extends Controller
         $status = $mqtt->checkConnectionStatus();
         return response()->json($status);
     }
+
+    public function menuOrder(MqttService $mqtt, $token)
+    {
+        dd($token);
+        $machine = VendingMachine::where('token', $token)->firstOrFail();
+        return Inertia::render('Vending', [
+            'machine' => $machine,
+            'clientKey' => config('services.midtrans.client_key')
+        ]);
+    }
+    
 } 
