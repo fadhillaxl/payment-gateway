@@ -15,7 +15,7 @@ Route::get('dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 // Payment Routes
-// Route::get('/payment', [PaymentController::class, 'index'])->name('payment');
+Route::get('/payment', [PaymentController::class, 'index'])->name('payment');
 Route::post('/payment/token', [PaymentController::class, 'getToken'])->name('payment.token');
 Route::get('/payment/success', [PaymentController::class, 'success'])->name('payment.success');
 Route::get('/payment/pending', [PaymentController::class, 'pending'])->name('payment.pending');
