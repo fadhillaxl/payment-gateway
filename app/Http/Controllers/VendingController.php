@@ -24,10 +24,6 @@ class VendingController extends Controller
 
     public function handleToken(Request $request, MqttService $mqtt, $token)
     {
-        $request->validate([
-            'token' => 'required|string|exists:vending_machines,token'
-        ]);
-
         $machine = VendingMachine::where('token', $token)->firstOrFail();
 
         // Try to establish MQTT connection
@@ -215,8 +211,11 @@ class VendingController extends Controller
         }
     }
 
-    public function getMqttStatus(MqttService $mqtt)
+    public function getMqttStatus(MqttService $mqtt, $token)
     {
+        // Verify the token exists
+        $machine = VendingMachine::where('token', $token)->firstOrFail();
+        
         $status = $mqtt->checkConnectionStatus();
         return response()->json($status);
     }

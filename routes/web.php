@@ -28,7 +28,7 @@ Route::get('/payment/status', [PaymentController::class, 'getRelayStatus']);
 Route::get('/payment/vend/{token}', [VendingController::class, 'handleToken'])->name('vending.order');
 Route::post('/payment/vend/order', [VendingController::class, 'sendOrder'])->name('vending.sendOrder');
 Route::post('/payment/vend/notification', [VendingController::class, 'handleNotification'])->name('vending.notification');
-Route::get('/payment/vend/mqtt-status', [VendingController::class, 'getMqttStatus'])->name('vending.mqtt.status');
+Route::get('/payment/vend/{token}/mqtt-status', [VendingController::class, 'getMqttStatus'])->name('vending.mqtt.status');
 
 // MQTT Test Routes (Consider adding auth middleware if this is sensitive)
 Route::prefix('admin/mqtt-test')->group(function () {

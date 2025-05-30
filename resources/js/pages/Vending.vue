@@ -184,7 +184,7 @@ const fetchMqttStatus = async () => {
     mqttStatus.value = 'checking';
     mqttStatusMessage.value = 'Checking MQTT connection status...';
     try {
-        const response = await axios.get('/payment/vend/mqtt-status');
+        const response = await axios.get(`/payment/vend/${props.machine.token}/mqtt-status`);
         mqttStatus.value = response.data.status;
         mqttStatusMessage.value = response.data.message;
         if (response.data.status === 'connected') {
