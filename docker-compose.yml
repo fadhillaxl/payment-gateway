@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  # PHP Service
+  # PHP-FPM Service for Laravel
   app:
     build:
       context: .
@@ -14,7 +14,7 @@ services:
     networks:
       - payment-gateway
 
-  # Nginx Service
+  # Nginx Service to serve Laravel
   nginx:
     image: nginx:alpine
     container_name: payment-gateway-nginx
@@ -26,8 +26,10 @@ services:
       - ./docker/nginx/conf.d:/etc/nginx/conf.d
     networks:
       - payment-gateway
+    depends_on:
+      - app
 
-  # MySQL Service
+  # MySQL Database Service
   db:
     image: mysql:8.0
     container_name: payment-gateway-db
@@ -42,7 +44,7 @@ services:
     networks:
       - payment-gateway
 
-  # Node Service for Vite
+  # Node Service for Vite (frontend dev server)
   node:
     image: node:18-alpine
     platform: linux/amd64
@@ -61,4 +63,4 @@ networks:
     driver: bridge
 
 volumes:
-  dbdata: 
+  dbdata:
