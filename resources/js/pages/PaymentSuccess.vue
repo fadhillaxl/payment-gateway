@@ -26,7 +26,7 @@
                     </div>
 
                     <div class="mt-8 space-y-4">
-                        <a href="/payment/vend?token=ABC123" 
+                        <a href="/payment/vend/ABC123" 
                            class="block w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-bold py-3 px-6 rounded-xl transition-all duration-200">
                             Return to Home
                         </a>

@@ -22,13 +22,13 @@ class VendingController extends Controller
         Config::$is3ds = config('services.midtrans.3ds');
     }
 
-    public function handleToken(Request $request, MqttService $mqtt)
+    public function handleToken(Request $request, MqttService $mqtt, $token)
     {
         $request->validate([
             'token' => 'required|string|exists:vending_machines,token'
         ]);
 
-        $machine = VendingMachine::where('token', $request->token)->firstOrFail();
+        $machine = VendingMachine::where('token', $token)->firstOrFail();
 
         // Try to establish MQTT connection
         try {

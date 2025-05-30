@@ -25,7 +25,7 @@ Route::post('/payment/update-status', [PaymentController::class, 'updateTransact
 Route::get('/payment/status', [PaymentController::class, 'getRelayStatus']);
 
 // Vending Routes
-Route::get('/payment/vend', [VendingController::class, 'handleToken'])->name('vending.order');
+Route::get('/payment/vend/{token}', [VendingController::class, 'handleToken'])->name('vending.order');
 Route::post('/payment/vend/order', [VendingController::class, 'sendOrder'])->name('vending.sendOrder');
 Route::post('/payment/vend/notification', [VendingController::class, 'handleNotification'])->name('vending.notification');
 Route::get('/payment/vend/mqtt-status', [VendingController::class, 'getMqttStatus'])->name('vending.mqtt.status');
