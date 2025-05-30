@@ -36,20 +36,20 @@ return [
     ],
 
     'midtrans' => [
-        'server_key' => env('MIDTRANS_SERVER_KEY'),
-        'client_key' => env('MIDTRANS_CLIENT_KEY'),
-        'merchant_id' => env('MIDTRANS_MERCHANT_ID'),
+        'merchant_id' => env('MIDTRANS_MERCHANT_ID', 'G974380638'),
+        'client_key' => env('MIDTRANS_CLIENT_KEY', 'SB-Mid-client-JPQuVZQ2c0_PuXsX'),
+        'server_key' => env('MIDTRANS_SERVER_KEY', 'SB-Mid-server-AZkHf6HGM1J5admjxavrGoX9'),
         'is_production' => env('MIDTRANS_IS_PRODUCTION', false),
-        'is_sanitized' => true,
-        'is_3ds' => true,
+        'sanitize' => env('MIDTRANS_SANITIZE', true),
+        '3ds' => env('MIDTRANS_3DS', true),
     ],
 
     'iot' => [
         'mqtt' => [
-            'host' => env('MQTT_HOST', 'localhost'),
+            'host' => env('MQTT_HOST', '103.116.203.74'),
             'port' => env('MQTT_PORT', 1883),
-            'username' => env('MQTT_USERNAME', ''),
-            'password' => env('MQTT_PASSWORD', ''),
+            'username' => env('MQTT_USERNAME', 'vending'),
+            'password' => env('MQTT_PASSWORD', 'vending61'),
             'client_id' => env('MQTT_CLIENT_ID', 'payment-gateway'),
             'clean_session' => env('MQTT_CLEAN_SESSION', true),
             'keep_alive' => env('MQTT_KEEP_ALIVE', 60),

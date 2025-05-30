@@ -20,12 +20,13 @@
                         </p>
                         <div class="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-4">
                             <p class="text-sm text-gray-500 dark:text-gray-400">Transaction ID</p>
-                            <p class="text-lg font-medium text-gray-900 dark:text-white">{{ $page.props.transaction_id || '#123456789' }}</p>
+                            
+                            <p class="text-lg font-medium text-gray-900 dark:text-white">{{ $page.url.split('=')[1] || order_id || '#123456789' }}</p>
                         </div>
                     </div>
 
                     <div class="mt-8 space-y-4">
-                        <a href="/payment" 
+                        <a href="/payment/vend?token=ABC123" 
                            class="block w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-bold py-3 px-6 rounded-xl transition-all duration-200">
                             Return to Home
                         </a>
