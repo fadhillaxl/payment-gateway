@@ -49,7 +49,6 @@ class VendingController extends Controller
 
     public function sendOrder(Request $request, MqttService $mqtt)
     {
-        dd($request->all());
         try {
             $validated = $request->validate([
                 'token' => 'required|string|exists:vending_machines,token',
