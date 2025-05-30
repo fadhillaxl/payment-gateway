@@ -225,6 +225,7 @@ class VendingController extends Controller
     {
         // dd($token);
         $machine = VendingMachine::where('token', $token)->firstOrFail();
+        dd($machine);
         return Inertia::render('Vending', [
             'machine' => $machine,
             'clientKey' => config('services.midtrans.client_key')
