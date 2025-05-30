@@ -223,7 +223,7 @@ class VendingController extends Controller
 
     public function menuOrder(MqttService $mqtt, $token)
     {
-        dd($token);
+        // dd($token);
         $machine = VendingMachine::where('token', $token)->firstOrFail();
         return Inertia::render('Vending', [
             'machine' => $machine,
