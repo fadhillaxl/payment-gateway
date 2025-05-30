@@ -15,17 +15,15 @@ Route::get('dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 // Payment Routes
-Route::get('/payment', [PaymentController::class, 'index'])->name('payment');
+// Route::get('/payment', [PaymentController::class, 'index'])->name('payment');
 Route::post('/payment/token', [PaymentController::class, 'getToken'])->name('payment.token');
 Route::get('/payment/success', [PaymentController::class, 'success'])->name('payment.success');
 Route::get('/payment/pending', [PaymentController::class, 'pending'])->name('payment.pending');
 Route::get('/payment/error', [PaymentController::class, 'error'])->name('payment.error');
 Route::post('/payment/notification', [PaymentController::class, 'notification'])->name('payment.notification');
-Route::post('/payment/update-status', [PaymentController::class, 'updateTransactionStatus'])->name('payment.update-status');
 Route::get('/payment/status', [PaymentController::class, 'getRelayStatus']);
 
 // Vending Routes
-Route::get('/payment/vend', [VendingController::class, 'handleToken'])->name('vending.order');
 Route::get('/payment/vend/{token}', [VendingController::class, 'handleToken'])->name('vending.order');
 Route::post('/payment/vend/order', [VendingController::class, 'sendOrder'])->name('vending.sendOrder');
 Route::post('/payment/vend/notification', [VendingController::class, 'handleNotification'])->name('vending.notification');
