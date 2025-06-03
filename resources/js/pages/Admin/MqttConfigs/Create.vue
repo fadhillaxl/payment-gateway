@@ -3,15 +3,18 @@
 
     <AppLayout :breadcrumbs="breadcrumbs">
         <div class="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">
-            <div class="bg-card rounded-xl border border-sidebar-border/70 p-6 dark:border-sidebar-border">
-                <h2 class="mb-6 text-xl font-semibold">Create MQTT Configuration</h2>
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-semibold">Create MQTT Configuration</h2>
+            </div>
+
+            <div class="relative flex-1 rounded-xl border border-sidebar-border/70 bg-card p-6 dark:border-sidebar-border">
                 <form @submit.prevent="submit" class="space-y-6">
                     <div>
                         <InputLabel for="host" value="Host" />
                         <TextInput
                             id="host"
                             type="text"
-                            class="mt-1 block w-full"
+                            class="mt-1 block w-full bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-700 focus:border-primary focus:ring-primary rounded-md shadow-sm text-gray-900 dark:text-gray-100"
                             v-model="form.host"
                             required
                             autofocus
@@ -24,7 +27,7 @@
                         <TextInput
                             id="port"
                             type="number"
-                            class="mt-1 block w-full"
+                            class="mt-1 block w-full bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-700 focus:border-primary focus:ring-primary rounded-md shadow-sm text-gray-900 dark:text-gray-100"
                             v-model="form.port"
                             required
                         />
@@ -36,7 +39,7 @@
                         <TextInput
                             id="username"
                             type="text"
-                            class="mt-1 block w-full"
+                            class="mt-1 block w-full bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-700 focus:border-primary focus:ring-primary rounded-md shadow-sm text-gray-900 dark:text-gray-100"
                             v-model="form.username"
                         />
                         <InputError :message="form.errors.username" class="mt-2" />
@@ -47,7 +50,7 @@
                         <TextInput
                             id="password"
                             type="password"
-                            class="mt-1 block w-full"
+                            class="mt-1 block w-full bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-700 focus:border-primary focus:ring-primary rounded-md shadow-sm text-gray-900 dark:text-gray-100"
                             v-model="form.password"
                         />
                         <InputError :message="form.errors.password" class="mt-2" />
@@ -58,7 +61,7 @@
                         <TextInput
                             id="client_id"
                             type="text"
-                            class="mt-1 block w-full"
+                            class="mt-1 block w-full bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-700 focus:border-primary focus:ring-primary rounded-md shadow-sm text-gray-900 dark:text-gray-100"
                             v-model="form.client_id"
                             required
                         />
@@ -73,7 +76,7 @@
                     <div class="flex items-center justify-end mt-4">
                         <Link
                             :href="route('dashboard.mqtt-configs.index')"
-                            class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 mr-4"
+                            class="text-muted-foreground hover:text-foreground mr-4 transition-colors"
                         >
                             Cancel
                         </Link>
@@ -87,7 +90,7 @@
     </AppLayout>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { Head, Link, useForm } from '@inertiajs/vue3';
 import AppLayout from '@/layouts/AppLayout.vue';
 import InputError from '@/components/InputError.vue';
@@ -98,10 +101,6 @@ import Checkbox from '@/components/Checkbox.vue';
 import { type BreadcrumbItem } from '@/types';
 
 const breadcrumbs: BreadcrumbItem[] = [
-    {
-        title: 'Dashboard',
-        href: '/dashboard',
-    },
     {
         title: 'MQTT Configurations',
         href: route('dashboard.mqtt-configs.index'),
