@@ -6,13 +6,17 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\VendingController;
 use App\Http\Controllers\MqttTestController;
 
+// Public routes
 Route::get('/', function () {
     return Inertia::render('Welcome');
 })->name('home');
 
-Route::get('dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Dashboard route with proper middleware
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/dashboard', function () {
+        return Inertia::render('Dashboard');
+    })->name('dashboard');
+});
 
 // Payment Routes
 Route::get('/payment', [PaymentController::class, 'index'])->name('payment');
@@ -38,6 +42,26 @@ Route::prefix('admin/mqtt-test')->group(function () {
     Route::post('/unsubscribe', [MqttTestController::class, 'unsubscribe'])->name('admin.mqtt.test.unsubscribe');
     Route::post('/disconnect', [MqttTestController::class, 'disconnect'])->name('admin.mqtt.test.disconnect');
     Route::get('/status', [MqttTestController::class, 'status'])->name('admin.mqtt.test.status');
+});
+
+// Dashboard Routes
+Route::middleware(['auth', 'verified'])->prefix('dashboard')->name('dashboard.')->group(function () {
+    // Menu Items
+    Route::resource('menu-items', \App\Http\Controllers\Admin\MenuItemController::class);
+    
+    // MQTT Configs
+    Route::resource('mqtt-configs', \App\Http\Controllers\Admin\MqttConfigController::class);
+
+    // MQTT Test Routes
+    Route::prefix('mqtt-test')->name('mqtt.test.')->group(function () {
+        Route::get('/', [MqttTestController::class, 'index'])->name('index');
+        Route::post('/submit', [MqttTestController::class, 'testConnection'])->name('submit');
+        Route::post('/publish', [MqttTestController::class, 'publish'])->name('publish');
+        Route::post('/subscribe', [MqttTestController::class, 'subscribe'])->name('subscribe');
+        Route::post('/unsubscribe', [MqttTestController::class, 'unsubscribe'])->name('unsubscribe');
+        Route::post('/disconnect', [MqttTestController::class, 'disconnect'])->name('disconnect');
+        Route::get('/status', [MqttTestController::class, 'status'])->name('status');
+    });
 });
 
 require __DIR__.'/settings.php';

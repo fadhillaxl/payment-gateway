@@ -6,8 +6,8 @@ import { ref } from 'vue';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
-        title: 'Dashboard',
-        href: '/dashboard',
+        title: 'test',
+        href: '/test',
     },
 ];
 
@@ -34,30 +34,11 @@ const menuItems = ref([
 </script>
 
 <template>
-    <Head title="Dashboard" />
+    <Head title="test" />
 
     <AppLayout :breadcrumbs="breadcrumbs">
         <div class="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">
-            <div class="grid auto-rows-min gap-4 md:grid-cols-3">
-                <Link 
-                    v-for="item in menuItems" 
-                    :key="item.title"
-                    :href="item.href"
-                    class="group relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 bg-card p-6 transition-colors hover:border-primary dark:border-sidebar-border dark:hover:border-primary"
-                >
-                    <div class="flex h-full flex-col justify-between">
-                        <div class="flex items-center gap-4">
-                            <div class="rounded-lg bg-primary/10 p-2 text-primary">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
-                                    <path stroke-linecap="round" stroke-linejoin="round" :d="item.icon" />
-                                </svg>
-                            </div>
-                            <h3 class="text-lg font-semibold">{{ item.title }}</h3>
-                        </div>
-                        <p class="text-sm text-muted-foreground">{{ item.description }}</p>
-                    </div>
-                </Link>
-            </div>
+            
             
             <div class="relative min-h-[100vh] flex-1 rounded-xl border border-sidebar-border/70 bg-card p-6 dark:border-sidebar-border md:min-h-min">
                 <h2 class="mb-4 text-xl font-semibold">Welcome to the Admin Dashboard</h2>
